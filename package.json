@@ -1,0 +1,43 @@
+{
+  "name": "films-articles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ng": "ng",
+    "start": "./node_modules/.bin/nodemon \"server.js\", -e js",
+    "build": "ng build --aot --prod",
+    "serve": "ng serve --port=4200",
+    "postinstall": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidmazi/films-articles.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidmazi/films-articles/issues"
+  },
+  "homepage": "https://github.com/davidmazi/films-articles#readme",
+  "dependencies": {
+    "@angular-devkit/build-angular": "^0.803.24",
+    "@angular/animations": "~8.2.14",
+    "@angular/cli": "^8.3.24",
+    "@angular/common": "~8.2.14",
+    "@angular/compiler": "~8.2.14",
+    "@angular/compiler-cli": "^8.2.14",
+    "@angular/core": "~8.2.14",
+    "@angular/forms": "~8.2.14",
+    "@angular/platform-browser": "~8.2.14",
+    "@angular/platform-browser-dynamic": "~8.2.14",
+    "@angular/router": "~8.2.14",
+    "mongoose": "^5.8.11",
+    "nodemon": "^2.0.2",
+    "npm": "^6.13.7",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
+  }
+}
