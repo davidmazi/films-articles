@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ArticleService} from "../services/article.service";
+import {Article} from "../models/article.model";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-article',
@@ -7,22 +10,26 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ArticleComponent implements OnInit {
 
-  @Input() title: string
-  @Input() isAdmin: boolean
-  @Input() content: string
+  @Input() title: string;
+  @Input() isAdmin: boolean;
+  @Input() content: string;
+  @Input() index: number;
+  @Input() article: Article;
 
-  constructor() {
+  constructor(private articleService: ArticleService, private appComponent: AppComponent) {
+
   }
 
   ngOnInit() {
   }
 
   getContent() {
-    return this.content;
+    return this.article.content;
   }
 
-  onDelete() {
-    console.log("delete")
+  onDelete(article: Article) {
+    this.articleService.deleteArticle(article);
+    this.appComponent.removeArticle(article);
   }
 
 }

@@ -1,8 +1,36 @@
-<li class="list-group-item">
-  <h4>ARTICLE : {{ title }} Content : {{ getContent()}}</h4>
-  <button
-    class="btn btn-danger"
-    *ngIf="isAdmin"
-    (click)="onDelete()">Delete
+<mat-card class="article">
+  <mat-card-header>
+    <mat-card-title>
+      {{ article.title }}
+      <mat-chip-list>
+        <app-category [category]="article.category"></app-category>
+      </mat-chip-list>
+
+    </mat-card-title>
+    <mat-card-subtitle>
+      by {{article.authorName}} on {{article.creationDate | date:'longDate'}}
+      <app-rating [rating]="article.rating"></app-rating>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="article-image-and-content">
+    <mat-grid-list cols="5">
+      <mat-grid-tile>
+        <img class="movie-image" alt="URL of article's image" src="{{article.imageURL}}">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="4">
+        <p class="article-content"> {{ getContent()}}</p>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+  <button mat-icon-button
+          color="warn"
+          (click)="onDelete(article)">
+    <mat-icon>delete_rounded</mat-icon>
   </button>
-</li>
+  <!--  </button>-button-->
+  <!--          *ngIf="isAdmin"-->
+  <!--          color="warn"-->
+  <!--          (click)="onDelete()">-->
+  <!--    <mat-icon>delete_rounded</mat-icon>-->
+  <!--  </button>-->
+</mat-card>
