@@ -1,0 +1,41 @@
+<!--<h1 mat-dialog-title>Hi {{data.authorName}}</h1>-->
+<!--Get current username-->
+
+<form name="articleForm" mat-dialog-content class="article-form" autocomplete="off" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="data.title" [formControl]="titleControl" name="title" required>
+    <mat-error *ngIf="titleControl.invalid">{{getTitleErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <div style="color: #757575; margin-top: 15px">Rating</div>
+  <mat-slider [step]="1" [min]="0" [max]="5" [thumbLabel]="true" [tickInterval]="1"
+              [(ngModel)]="data.rating" name="rating"></mat-slider>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="data.category=selectedCategory" name="category">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{category}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.imageURL" [formControl]="imageURLControl" placeholder="Image URL" name="imageURL"
+           required>
+    <mat-error *ngIf="imageURLControl.invalid">{{getImageURLErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field hintLabel="Max 500 characters">
+    <textarea matInput #content maxlength="500" [(ngModel)]="data.content" [formControl]="contentControl"
+              cdkTextareaAutosize placeholder="Review" name="content"></textarea>
+    <mat-hint align="end">{{content["value"]["length"] || 0}}/500</mat-hint>
+    <mat-error *ngIf="contentControl.invalid">
+      {{getContentErrorMessage()}} ({{content["value"]["length"] || 0}}/500)
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <button mat-icon-button (click)="onNoClick()" color="warn" type="button">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button mat-icon-button [disabled]="!formIsValid()" color="primary" type="submit">
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+</form>
