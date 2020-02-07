@@ -23,7 +23,7 @@ router.route("/articles").get(function (req, res) {
         }
         res.status(200).json({
             status: "success",
-            message: "employees retrieved successfully",
+            message: "articles retrieved successfully",
             data: articles
         });
     });
@@ -31,9 +31,7 @@ router.route("/articles").get(function (req, res) {
 
 // example : /api/newarticle
 router.route("/newarticle").post(function (req, res) {
-    console.log(req.body);
     let newArticle = new article(req.body);
-    console.log(req);
     newArticle.save(function (err, article) {
         if (err) {
             res.json({
@@ -41,6 +39,7 @@ router.route("/newarticle").post(function (req, res) {
                 message: err
             });
         }
+        res.status(200).json({status:"success", message: "article created successfully"});
         console.log(article.title + " saved to articles collection.");
     });
 });
