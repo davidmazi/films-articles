@@ -32,7 +32,7 @@ export class ArticleService {
     })
   }
 
-  deleteArticle(article: Article) {
+  deleteArticleFromServer(article: Article) {
     const url = `http://localhost:8080/api/deletearticle/${article["_id"]}`;
     return new Promise((resolve, reject) => {
       this.httpClient.delete(url).subscribe(
@@ -50,12 +50,9 @@ export class ArticleService {
   postNewArticleToServer(data) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    console.log(JSON.stringify(data));
-    const jsonData = JSON.stringify(data);
     return new Promise((resolve, reject) => {
-      this.httpClient.post('http://localhost:8080/api/newarticle', jsonData, {headers: headers}).subscribe(
+      this.httpClient.post('http://localhost:8080/api/newarticle', data).subscribe(
         (response) => {
-          console.log("here service post");
           resolve(response);
         }, (error) => {
           console.error(error);
