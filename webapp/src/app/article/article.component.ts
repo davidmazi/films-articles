@@ -28,8 +28,7 @@ export class ArticleComponent implements OnInit {
   }
 
   onDelete(article: Article) {
-    this.articleService.deleteArticle(article);
-    this.appComponent.removeArticle(article);
+    this.articleService.deleteArticleFromServer(article).then(() => this.appComponent.removeArticle(article));
   }
 
 }
