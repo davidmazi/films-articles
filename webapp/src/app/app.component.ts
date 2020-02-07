@@ -29,9 +29,19 @@ export class AppComponent implements OnInit {
   }
 
   removeArticle(articleToDelete) {
-    this.articles = this.articleService.articles.filter((article) => article["_id"] != articleToDelete['_id'])
+    this.articles = this.articleService.articles.filter((article) => article["_id"] != articleToDelete['_id']);
     this.articleService.getAllArticlesFromServer().then(() => {
       console.log("Updated")
+    })
+  }
+
+  addArticle(articleToAdd) {
+    return new Promise((resolve) => {
+      this.articles.unshift(articleToAdd);
+      this.articleService.getAllArticlesFromServer().then(() => {
+        console.log("Updated");
+        resolve();
+      })
     })
   }
 }
