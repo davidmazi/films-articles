@@ -72,19 +72,9 @@ export class ArticleformComponent implements OnInit {
     console.log("Submit");
     this.data.creationDate = Date.now().toString();
     this.articleService.postNewArticleToServer(this.data).then(() => {
-      console.log("here post");
-        this.articleService.getAllArticlesFromServer().then(() => {
-          console.log("here get");
-          this.appComponent.articles.unshift(this.data);
-
-          // for (let i = 0; i < this.appComponent.articles.length; i++) {
-          //   console.log(i)
-          //   delete this.appComponent.articles[i];
-          // }
-          // this.appComponent.articles.length = 0;
-          this.dialogRef.close();
+        this.appComponent.addArticle(this.data).then(() => {
+          setTimeout(() => this.dialogRef.close(),200)
         });
-        // this.appComponent.emptyArticles();
       }
     );
   }
