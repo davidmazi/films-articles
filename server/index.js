@@ -21,19 +21,18 @@ const corsOptions = {
     credential: true
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions),
+    bodyParser.urlencoded({
+        extended: true
+    }),
+    bodyParser.json());
 
 // Use Api routes in the App
-app.use(
-    "/api",
+app.use("/api",
     apiRoutes);
 
 app.use(
     express.static(path.join(__dirname, "../webapp", "dist", "moviesArticles")),
-    bodyParser.urlencoded({
-        extended: true
-    }),
-    bodyParser.json(),
 );
 
 app.use('*', (req, res) => res.sendFile(path.join(__dirname, '../webapp', 'dist', "moviesArticles", 'index.html')), cors());
