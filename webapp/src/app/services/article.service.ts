@@ -26,7 +26,7 @@ export class ArticleService {
           },
           (error) => {
             console.error((error));
-            reject(error)
+            reject(error);
           }
         )
     })
