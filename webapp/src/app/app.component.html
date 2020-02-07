@@ -1,14 +1,8 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Articles</h2>
-      <ul class="list-group">
-        <app-article
-          *ngFor="let article of articles"
-          [title]="article.title"
-          [content]="article.content">
-        </app-article>
-      </ul>
-    </div>
-  </div>
+<div class="mat-app-background">
+  <app-topmenu></app-topmenu>
+  <app-article
+    *ngFor="let article of articles; let i = index"
+    [article]="article"
+    [index]="i">
+  </app-article>
 </div>
