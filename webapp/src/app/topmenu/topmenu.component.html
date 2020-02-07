@@ -1,0 +1,14 @@
+<mat-card class="top-menu">
+  <button mat-icon-button (click)="openDialog()">
+    <mat-icon class="menu-icon">add</mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="filteringMenu">
+    <mat-icon class="menu-icon">filter_list</mat-icon>
+  </button>
+  <mat-menu #filteringMenu="matMenu">
+    <button mat-menu-item (click)="appComponent.filterArticles('All')">All</button>
+    <button mat-menu-item (click)="appComponent.filterArticles('Horror')">Horror</button>
+    <button mat-menu-item (click)="appComponent.filterArticles('Action')">Action</button>
+    <button mat-menu-item (click)="appComponent.filterArticles('Adventure')">Adventure</button>
+  </mat-menu>
+</mat-card>
