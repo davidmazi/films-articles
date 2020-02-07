@@ -8,6 +8,6 @@ const articleSchema = new mongoose.Schema({
     authorName: String,
     creationDate: Date,
     category: String
-}, {collection: "articles", timestamps: true});
+}, {collection: "articles"});
 
 module.exports = articleSchema;
