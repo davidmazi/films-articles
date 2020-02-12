@@ -1,0 +1,6 @@
+<app-topmenu></app-topmenu>
+<app-article
+  *ngFor="let article of articles; let i = index"
+  [article]="article"
+  [index]="i">
+</app-article>
