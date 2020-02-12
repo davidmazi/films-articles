@@ -1,12 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
 const mongoose = require('mongoose');
 const cors = require("cors");
-const path = require("path");
 
-const apiRoutes = require("./API/apiRoutes");
+const routes = require("./routes/routes")
 
 const app = express();
+
+module.exports.app = app;
+
 
 const originsWhitelist = [
     'http://localhost:4200',
@@ -18,36 +21,28 @@ const corsOptions = {
         const isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
         callback(null, isWhitelisted);
     },
-    credential: true
+    credentials: true
 };
 
 app.use(cors(corsOptions),
     bodyParser.urlencoded({
         extended: true
     }),
-    bodyParser.json());
-
-// Use Api routes in the App
-app.use("/api",
-    apiRoutes);
-
-app.use(
-    express.static(path.join(__dirname, "../webapp", "dist", "moviesArticles")),
+    bodyParser.json(),
+    cookieParser()
 );
 
-app.use('*', (req, res) => res.sendFile(path.join(__dirname, '../webapp', 'dist', "moviesArticles", 'index.html')), cors());
+app.use(routes);
 
 const port = process.env.PORT || 8080;
-
 
 mongoose.connect('mongodb://localhost/moviesArticles', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-    // we're connected!
-    console.log("Yay");
     app.listen(port, function () {
-        console.log("Running API on port " + port);
+        console.log("Running Server on port " + port);
     });
+
 });
