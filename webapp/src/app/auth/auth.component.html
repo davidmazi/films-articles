@@ -1,0 +1,35 @@
+{{authStatus}}
+<div class="form-parent" *ngIf="!authStatus">
+  <form name="authForm" class="auth-form" autocomplete="off" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Username" [(ngModel)]="user.name" [formControl]="userNameControl" name="name"
+             required>
+      <mat-error *ngIf="userNameControl.invalid">{{getUserNameErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password"
+             [formControl]="passwordControl" name="password"
+             required>
+      <button mat-icon-button matSuffix (click)="hide =!hide" type="button">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordControl.invalid">{{getPasswordErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-error *ngIf="userNotFound">Username and password not found in our database</mat-error>
+    <div>
+      <button mat-icon-button [disabled]="!formIsValid()" color="primary" type="submit">
+        <mat-icon>done</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
+<div class="form-parent" *ngIf="authStatus">
+  <form name="signOutForm" class="auth-form" (ngSubmit)="onSignOut()">
+    Sign out {{user.name}}
+    <br>
+    <button mat-icon-button color="warn" type="submit">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </form>
+</div>
