@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 
 const articleSchema = require("../../schemas/articleSchema");
 const userController = require("../../controller/userController");
-const authMiddleware = require("../../middleware/auth.middleware")
-const utils = require("../../utils/utils")
+const authMiddleware = require("../../middleware/auth.middleware");
+const utils = require("../../utils/utils");
 
 const article = mongoose.model('articles', articleSchema);
 
@@ -19,7 +19,7 @@ router.route("/findUser").get(function (req, res, next) {
             })
         }
         if (foundUser.length !== 0) {
-            res.cookie("Movies", foundUser[0]._id.toString())
+            res.cookie("Movies", foundUser[0]._id.toString());
             res.status(200).json({
                 status: "success",
                 message: "User exists",

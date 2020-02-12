@@ -54,7 +54,7 @@ export class AuthComponent implements OnInit {
   }
 
   onSignOut() {
-    this.authService.signOut()
+    this.authService.signOut();
     this.user = this.authService.currentUser;
     this.authStatus = this.authService.isAuth;
   }

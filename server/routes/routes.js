@@ -3,7 +3,7 @@ const path = require("path");
 
 const apiRoutes = require("./API/apiRoutes");
 const authMiddleware = require("../middleware/auth.middleware");
-const utils = require("../utils/utils")
+const utils = require("../utils/utils");
 
 const router = express.Router();
 

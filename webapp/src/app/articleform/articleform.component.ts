@@ -77,7 +77,7 @@ export class ArticleformComponent implements OnInit {
   onSubmit(): void {
     this.authService.refreshUser().then((refreshedUser) => {
       console.log(refreshedUser);
-      this.data.authorName = this.authService.currentUser.name
+      this.data.authorName = this.authService.currentUser.name;
       console.log("Submit");
       this.data.creationDate = Date.now().toString();
       return this.articleService.postNewArticleToServer(this.data)

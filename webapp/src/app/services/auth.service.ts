@@ -24,8 +24,7 @@ export class AuthService {
       this.httpClient.get<[User]>('http://localhost:8080/api/findUser', {params: params, withCredentials: true})
         .subscribe(
           (response) => {
-            console.log(response)
-            console.log("response")
+            console.log(response);
             this.currentUser = response["data"][0];
             this.isAuth = true;
             resolve(this.currentUser)
@@ -66,7 +65,7 @@ export class AuthService {
       this.httpClient.get<[User]>(`http://localhost:8080/api/findUser/${this.getCurrentCookie()}`, {withCredentials: true})
         .subscribe(
           (response) => {
-            console.log(response)
+            console.log(response);
             this.currentUser = response["data"];
             this.isAuth = true;
             resolve(this.currentUser)
