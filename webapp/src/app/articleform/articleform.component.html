@@ -38,4 +38,5 @@
       <mat-icon>done</mat-icon>
     </button>
   </div>
+  <mat-error *ngIf="invalidForm">{{getSubmitErrorMessage()}}</mat-error>
 </form>

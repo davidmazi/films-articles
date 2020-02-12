@@ -3,7 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FormControl, Validators} from "@angular/forms";
 
 import {ArticleService} from "../services/article.service";
-import {AppComponent} from "../app.component";
+import {ArticlesComponent} from "../articles/articles.component";
+import {AuthService} from "../services/auth.service";
 
 export interface ArticleformData {
   title: string;
@@ -29,9 +30,12 @@ export class ArticleformComponent implements OnInit {
     public dialogRef: MatDialogRef<ArticleformComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ArticleformData,
     private articleService: ArticleService,
-    private appComponent: AppComponent) {
+    private articlesComponent: ArticlesComponent,
+    private authService: AuthService) {
   }
 
+  invalidForm: boolean;
+  submitErrorStatus: number;
   selectedCategory: string;
 
   titleControl = new FormControl(this.data.title, [Validators.required, Validators.minLength(3)]);
@@ -54,6 +58,10 @@ export class ArticleformComponent implements OnInit {
         '';
   }
 
+  getSubmitErrorMessage(){
+    return this.submitErrorStatus === 404 ? "There was an error posting the article, try to sign out and sign back in" : "";
+  }
+
   formIsValid() {
     return this.imageURLControl.valid && this.titleControl.valid && this.contentControl.valid
   }
@@ -67,15 +75,20 @@ export class ArticleformComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //TODO add authorName for current user
-    // this.data.authorName = ...
-    console.log("Submit");
-    this.data.creationDate = Date.now().toString();
-    this.articleService.postNewArticleToServer(this.data).then(() => {
-        this.appComponent.addArticle(this.data).then(() => {
-          setTimeout(() => this.dialogRef.close(),200)
-        });
-      }
-    );
+    this.authService.refreshUser().then((refreshedUser) => {
+      console.log(refreshedUser);
+      this.data.authorName = this.authService.currentUser.name
+      console.log("Submit");
+      this.data.creationDate = Date.now().toString();
+      return this.articleService.postNewArticleToServer(this.data)
+
+    }).catch(error => {
+      this.invalidForm = true;
+      this.submitErrorStatus = error.status;
+    }).then(() => {
+      return this.articlesComponent.addArticle(this.data);
+    }).then(() => {
+      return setTimeout(() => this.dialogRef.close(), 200)
+    });
   }
 }
