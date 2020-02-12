@@ -33,7 +33,7 @@ speed-measure-plugin*.json
 
 # misc
 /.sass-cache
-/connect.lock
+/findUser.lock
 /coverage
 /libpeerconnection.log
 npm-debug.log
