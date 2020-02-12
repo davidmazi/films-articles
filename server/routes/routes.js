@@ -7,6 +7,13 @@ const utils = require("../utils/utils");
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+    console.log(req.path);
+    if (req.path === "/") {
+        res.redirect("/articles");
+    } else next();
+});
+
 router.use("/api", apiRoutes);
 
 //Route for Static Files of Angular
