@@ -21,7 +21,6 @@ export class ArticleService {
           (response) => {
             this.articles = response["data"];
             console.log(response["data"]);
-
             resolve(this.articles)
           },
           (error) => {
