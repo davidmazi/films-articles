@@ -14,13 +14,24 @@ import {
   MatChipsModule, MatDialogModule,
   MatGridListModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatMenuModule, MatSelectModule
+  MatListModule, MatMenuModule, MatSelectModule, MatToolbarModule
 } from "@angular/material";
 import {RatingComponent} from './rating/rating.component';
 import {CategoryComponent} from './category/category.component';
 import {TopmenuComponent} from './topmenu/topmenu.component';
 import {ArticleformComponent} from './articleform/articleform.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthComponent} from './auth/auth.component';
+import {ArticlesComponent} from './articles/articles.component';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthService} from "./services/auth.service";
+import {AuthGuard} from "./services/auth-guard.service";
+
+const appRoutes: Routes = [
+  {path: 'auth', component: AuthComponent},
+  {path: 'articles', component: ArticlesComponent},
+  {path: '**', redirectTo: "articles"}
+];
 
 @NgModule({
   declarations: [
@@ -30,6 +41,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     CategoryComponent,
     TopmenuComponent,
     ArticleformComponent,
+    AuthComponent,
+    ArticlesComponent,
   ],
   entryComponents: [
     ArticleformComponent
@@ -53,8 +66,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    MatToolbarModule
   ],
-  providers: [ArticleService, AppComponent],
+  providers: [ArticleService, AppComponent, ArticlesComponent, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

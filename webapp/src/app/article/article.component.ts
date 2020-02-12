@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArticleService} from "../services/article.service";
 import {Article} from "../models/article.model";
-import {AppComponent} from "../app.component";
+import {ArticlesComponent} from "../articles/articles.component";
 
 @Component({
   selector: 'app-article',
@@ -16,7 +16,7 @@ export class ArticleComponent implements OnInit {
   @Input() index: number;
   @Input() article: Article;
 
-  constructor(private articleService: ArticleService, private appComponent: AppComponent) {
+  constructor(private articleService: ArticleService, private articlesComponent: ArticlesComponent) {
 
   }
 
@@ -28,7 +28,7 @@ export class ArticleComponent implements OnInit {
   }
 
   onDelete(article: Article) {
-    this.articleService.deleteArticleFromServer(article).then(() => this.appComponent.removeArticle(article));
+    this.articleService.deleteArticleFromServer(article).then(() => this.articlesComponent.removeArticle(article));
   }
 
 }

@@ -1,4 +1,4 @@
-<mat-card class="top-menu">
+<mat-toolbar class="top-menu">
   <button mat-icon-button (click)="openDialog()">
     <mat-icon class="menu-icon">add</mat-icon>
   </button>
@@ -6,9 +6,13 @@
     <mat-icon class="menu-icon">filter_list</mat-icon>
   </button>
   <mat-menu #filteringMenu="matMenu">
-    <button mat-menu-item (click)="appComponent.filterArticles('All')">All</button>
-    <button mat-menu-item (click)="appComponent.filterArticles('Horror')">Horror</button>
-    <button mat-menu-item (click)="appComponent.filterArticles('Action')">Action</button>
-    <button mat-menu-item (click)="appComponent.filterArticles('Adventure')">Adventure</button>
+    <button mat-menu-item (click)="articlesComponent.filterArticles('All')">All</button>
+    <button mat-menu-item (click)="articlesComponent.filterArticles('Horror')">Horror</button>
+    <button mat-menu-item (click)="articlesComponent.filterArticles('Action')">Action</button>
+    <button mat-menu-item (click)="articlesComponent.filterArticles('Adventure')">Adventure</button>
   </mat-menu>
-</mat-card>
+  <span class="spacer"></span>
+  <a [routerLink]="['/auth']" mat-icon-button>
+    <mat-icon class="menu-icon">account_circle</mat-icon>
+  </a>
+</mat-toolbar>

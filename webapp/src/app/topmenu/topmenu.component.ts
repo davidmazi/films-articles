@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material";
 import {ArticleformComponent} from "../articleform/articleform.component";
-import {AppComponent} from "../app.component";
+import {ArticlesComponent} from "../articles/articles.component";
 
 @Component({
   selector: 'app-topmenu',
@@ -10,7 +10,7 @@ import {AppComponent} from "../app.component";
 })
 export class TopmenuComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public appComponent: AppComponent) {
+  constructor(public dialog: MatDialog, public articlesComponent: ArticlesComponent) {
   }
 
   ngOnInit() {
@@ -29,7 +29,6 @@ export class TopmenuComponent implements OnInit {
         imageURL: ""
       }
     });
-//TODO change authorName to current user
     dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
